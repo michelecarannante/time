@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown all'Estate</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(to bottom, #0093E9, #80D0C7); /* Mare e cielo */
+        }
+        .countdown-container {
+            text-align: center;
+            background: #f5f7fa;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        .countdown-title {
+            font-size: 24px;
+            color: #004080;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .countdown {
+            display: flex;
+            gap: 12px;
+        }
+        .time-box {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+        .time-box h2 {
+            font-size: 2rem;
+            color: #004080;
+            margin-bottom: 5px;
+        }
+        .time-box p {
+            font-size: 0.9rem;
+            color: #333;
+            font-weight: bold;
+        }
+        /* Icone decorative */
+        .sun {
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            font-size: 50px;
+            color: #FFD700;
+        }
+        .boat {
+            position: absolute;
+            bottom: -20px;
+            left: -20px;
+            font-size: 40px;
+            color: #004080;
+        }
+        .bird {
+            position: absolute;
+            top: -15px;
+            left: 10%;
+            font-size: 30px;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="countdown-container">
+        <div class="countdown-title">Tempo rimanente all'Estate</div>
+        <span class="sun">☀️</span>
+        <span class="boat">⛵</span>
+        <span class="bird">🕊️</span>
+        <div class="countdown">
+            <div class="time-box">
+                <h2 id="days">00</h2>
+                <p>Giorni</p>
+            </div>
+            <div class="time-box">
+                <h2 id="hours">00</h2>
+                <p>Ore</p>
+            </div>
+            <div class="time-box">
+                <h2 id="minutes">00</h2>
+                <p>Minuti</p>
+            </div>
+            <div class="time-box">
+                <h2 id="seconds">00</h2>
+                <p>Secondi</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function countdownToSummer() {
+            const summerDate = new Date(new Date().getFullYear(), 5, 21, 0, 0, 0); // 21 giugno
+            const now = new Date();
+            
+            if (now > summerDate) {
+                summerDate.setFullYear(summerDate.getFullYear() + 1); // Prossima estate
+            }
+            
+            const timeDifference = summerDate - now;
+
+            const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerText = days.toString().padStart(2, "0");
+            document.getElementById("hours").innerText = hours.toString().padStart(2, "0");
+            document.getElementById("minutes").innerText = minutes.toString().padStart(2, "0");
+            document.getElementById("seconds").innerText = seconds.toString().padStart(2, "0");
+        }
+
+        countdownToSummer();
+        setInterval(countdownToSummer, 1000);
+    </script>
+</body>
+</html>
